@@ -9,11 +9,11 @@ const getComputerChoice = () => {
     }else return 'scissors'
 
 };
-const getHumanChoice = (userInput) =>{
-    choice = "rock","paper","scissors";
-    userInput = prompt('rock paper scissors', '');
-    regex = /rock|paper|scissors/i;
 
+const getHumanChoice = (userInput) =>{
+    Input = prompt('rock paper scissors', '');
+    userInput = Input.toString().toLowerCase();
+    regex = /rock|paper|scissors/i;    
     if (userInput.search(regex) >= 0) {
         return userInput
     } else alert('Try Again');
@@ -22,28 +22,28 @@ const getHumanChoice = (userInput) =>{
 let humanScore = 0 ;
 let computerScore = 0 ;
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
 let playRound = (humanChoice, computerChoice) => {
-
+    
     switch(humanChoice) {
         case 'rock':
             humanChoice.length === computerChoice.length ? console.log('tie'):
-            humanChoice.length === 4 && computerChoice.length > 5 ? console.log(`you win! ${humanChoice} beats ${computerChoice}`):
-            humanChoice.length === 4 && computerChoice.length === 5 ? console.log(`you lose =! ${computerChoice} beats ${humanChoice}`): ''
+            humanChoice.length === 4 && computerChoice.length === 8 ? console.log(`you win! ${humanChoice} beats ${computerChoice}`) && ++humanScore:
+            humanChoice.length === 4 && computerChoice.length === 5 ? console.log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore: ''
         break;
         case 'paper':
             humanChoice.length === computerChoice.length ? console.log('tie'):
-            humanChoice.length === 5 && computerChoice.length === 4 ? console.log(`you win ${humanChoice} beats ${computerChoice}`): 
-            computerChoice.length > 5 && humanChoice.length === 5 ? console.log(`you lose ${computerChoice} beats ${humanChoice}`):''
+            humanChoice.length === 5 && computerChoice.length === 4 ? console.log(`you win ${humanChoice} beats ${computerChoice}`) && ++humanScore: 
+            computerChoice.length > 5 && humanChoice.length === 5 ? console.log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore:''
         break;
         case 'scissors':
             humanChoice.length === computerChoice.length ? log(`tie`):
-            humanChoice.length == 8 && computerChoice.length < 6 ? log(`you win! ${humanChoice} beats ${computerChoice}`) : 
-            humanChoice.length === 8 && computerChoice === 4 ? log(`you lose ${computerChoice} beats ${humanChoice}`)
+            humanChoice.length === 8 && computerChoice.length === 5 ? log(`you win! ${humanChoice} beats ${computerChoice}`) && ++humanScore: 
+            humanChoice.length === 8 && computerChoice === 4 ? log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore : ''
             
 
+        }
     }
-}
-console.log(playRound(humanChoice, computerChoice));
+
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+playRound(humanChoice, computerChoice);
