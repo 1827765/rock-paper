@@ -1,4 +1,7 @@
-const log = console.log()
+const log = console.log;
+let humanScore = 0;
+let computerScore = 0;
+
 
 const getComputerChoice = () => {
     random= Math.random().toString().charAt(5);
@@ -10,40 +13,55 @@ const getComputerChoice = () => {
 
 };
 
-const getHumanChoice = (userInput) =>{
-    Input = prompt('rock paper scissors', '');
-    userInput = Input.toString().toLowerCase();
-    regex = /rock|paper|scissors/i;    
-    if (userInput.search(regex) >= 0) {
-        return userInput
-    } else alert('Try Again');
+const getHumanChoice = () => {
+    const input = prompt('rock, paper, or scissors:', '').toLowerCase();
+    const regex = /^(rock|paper|scissors)$/i;
+    if (regex.test(input)) {
+        return input;
+    } else {
+        alert('Invalid choice. Try again.');
+        return getHumanChoice();
+    }
+};
+
+const playRound = (humanChoice, computerChoice) => {
+    if (humanChoice === computerChoice) {
+        console.log('It\'s a tie!');
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        humanScore++;
+    } else {
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+        computerScore++;
+    }
+};
+
+
+const scoring = () => {
+
+        if (humanScore === 3 && computerScore < 3 ) {
+            return console.log(`${humanScore}YOU BEAT THE SYSTEM!!!`)
+        } else if (computerScore === 3 && humanScore < 3 ) {
+            return console.log(`${computerScore} vs ${humanScore}THE SYSTEM WINS`);   
+        }
+};
+
+const playGame = () => {
+    while (humanScore < 3 && computerScore < 3) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+        log(humanChoice);
+        log(computerChoice);
+        }
+    scoring();
+
+
 
 };
-let humanScore = 0 ;
-let computerScore = 0 ;
 
-let playRound = (humanChoice, computerChoice) => {
-    
-    switch(humanChoice) {
-        case 'rock':
-            humanChoice.length === computerChoice.length ? console.log('tie'):
-            humanChoice.length === 4 && computerChoice.length === 8 ? console.log(`you win! ${humanChoice} beats ${computerChoice}`) && ++humanScore:
-            humanChoice.length === 4 && computerChoice.length === 5 ? console.log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore: ''
-        break;
-        case 'paper':
-            humanChoice.length === computerChoice.length ? console.log('tie'):
-            humanChoice.length === 5 && computerChoice.length === 4 ? console.log(`you win ${humanChoice} beats ${computerChoice}`) && ++humanScore: 
-            computerChoice.length > 5 && humanChoice.length === 5 ? console.log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore:''
-        break;
-        case 'scissors':
-            humanChoice.length === computerChoice.length ? log(`tie`):
-            humanChoice.length === 8 && computerChoice.length === 5 ? log(`you win! ${humanChoice} beats ${computerChoice}`) && ++humanScore: 
-            humanChoice.length === 8 && computerChoice === 4 ? log(`you lose ${computerChoice} beats ${humanChoice}`) && ++computerScore : ''
-            
-
-        }
-    }
-
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-playRound(humanChoice, computerChoice);
+playGame();
