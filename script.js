@@ -57,8 +57,8 @@ const scoring = () => {
         THE SYSTEM WINS REFRESH PAGE`;
         Main.append(CmFinals);
         if (HmSc.value > 3 || CmSc > 3) {
-            humanScore = 0;
-            computerScore = 0;
+            humanScore = '';
+            computerScore = '';
             CmSc.value = computerScore;
             HmSc.value = humanScore;
         };
