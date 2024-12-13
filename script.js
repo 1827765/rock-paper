@@ -13,16 +13,7 @@ const getComputerChoice = () => {
 
 };
 
-const getHumanChoice = () => {
-    const input = prompt('rock, paper, or scissors:', '').toLowerCase();
-    const regex = /^(rock|paper|scissors)$/i;
-    if (regex.test(input)) {
-        return input;
-    } else {
-        alert('Invalid choice. Try again.');
-        return getHumanChoice();
-    }
-};
+
 
 const playRound = (humanChoice, computerChoice) => {
     if (humanChoice === computerChoice) {
@@ -43,25 +34,67 @@ const playRound = (humanChoice, computerChoice) => {
 
 const scoring = () => {
 
-        if (humanScore === 3 && computerScore < 3 ) {
-            return console.log(`${humanScore}YOU BEAT THE SYSTEM!!!`)
-        } else if (computerScore === 3 && humanScore < 3 ) {
-            return console.log(`${computerScore} vs ${humanScore}THE SYSTEM WINS`);   
-        }
+    if (humanScore === 3 && computerScore < 3 ) {
+        return console.log(`${humanScore}YOU BEAT THE SYSTEM!!!`)
+    } else if (computerScore === 3 && humanScore < 3 ) {
+        return console.log(`${computerScore} vs ${humanScore}THE SYSTEM WINS`);   
+    };
+    if (humanScore > 4 || computerScore > 4 ) {
+        humanScore = 0;
+        computerScore  = 0;
+    };
 };
 
-const playGame = () => {
-    while (humanScore < 3 && computerScore < 3) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
-        log(humanChoice);
-        log(computerChoice);
-        }
+// const playGame = () => {
+//     while (humanScore < 3 && computerScore < 3) {
+//         const humanChoice = getHumanChoice();
+//         const computerChoice = getComputerChoice();
+//         playRound(humanChoice, computerChoice);
+//         log(humanChoice);
+//         log(computerChoice);
+//         }
+//     
+
+
+
+// };
+
+// playGame();
+
+const Main = document.querySelector('#main')
+const Rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button');
+Main.appendChild(Rock);
+Main.appendChild(paper);
+Main.appendChild(scissors);
+
+
+Rock.textContent = 'rock'
+paper.textContent = 'paper'
+scissors.textContent = 'scissors'
+Rock.value = 'rock'
+paper.value = 'paper'
+scissors.value = 'scissors'
+
+Rock.addEventListener('click', (humanChoice, computerChoice) => {
+    humanChoice = Rock.value;
+    computerChoice  = getComputerChoice()
+    playRound(humanChoice, computerChoice);
     scoring();
+});
+paper.addEventListener('click', (humanChoice, computerChoice) => {
+    humanChoice = paper.value;
+    computerChoice = getComputerChoice()
+    playRound(humanChoice,computerChoice);
+    scoring();
+});
 
+scissors.addEventListener('click',(humanChoice, computerChoice) => {
+    humanChoice = scissors.value;
+    computerChoice = getComputerChoice();
+    console
+    playRound(humanChoice, computerChoice)
+    scoring();
+});
 
-
-};
-
-playGame();
